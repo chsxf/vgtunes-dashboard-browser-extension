@@ -47,7 +47,23 @@ browser.menus.onClicked.addListener((info, tab) => {
         tabId: tab.id,
       },
       func: () => {
-        console.log("test");
+        const metaElements = document.getElementsByTagName("meta");
+        for (const element of metaElements) {
+          if (element.name == "bc-page-properties") {
+            json_content = JSON.parse(element.content);
+
+            output = `${json_content.item_id}|${window.location.href}`;
+
+            navigator.clipboard.writeText(output);
+
+            alert(
+              `Generated platform Id:\n\n${output}\n\n(Copied to clipboard)`,
+            );
+            return;
+          }
+        }
+
+        alert("Unable to generate platform Id for this page.");
       },
     });
   }
