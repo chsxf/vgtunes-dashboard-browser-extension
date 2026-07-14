@@ -10,7 +10,9 @@
   },
 
   "browser_specific_settings": {
-    "gecko": {}
+    "gecko": {
+      "id": "@dev.chsxf.vgtunes.dashboard-browser-extension"
+    }
   },
 
   "permissions": ["menus", "scripting", "tabs", "clipboardWrite"],
