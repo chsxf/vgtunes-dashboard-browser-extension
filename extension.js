@@ -38,10 +38,23 @@ browser.menus.create(
 
 let bandcampURLRegex = /bandcamp\.com\//;
 browser.menus.onClicked.addListener((info, tab) => {
-  if (
-    info.menuItemId == COPY_PLATOFMR_ID_MENUID &&
-    bandcampURLRegex.test(tab.url)
-  ) {
+  if (info.menuItemId == COPY_PLATOFMR_ID_MENUID) {
+    tryGenerateBandcampPlatformId(tab);
+  }
+});
+
+browser.commands.onCommand.addListener((command) => {
+  if (command == "copy-bandcamp-platform-id") {
+    browser.tabs.query({ currentWindow: true, active: true }).then((tabs) => {
+      if (tabs.length > 0) {
+        tryGenerateBandcampPlatformId(tabs[0]);
+      }
+    }, null);
+  }
+});
+
+function tryGenerateBandcampPlatformId(tab) {
+  if (bandcampURLRegex.test(tab.url)) {
     browser.scripting.executeScript({
       target: {
         tabId: tab.id,
@@ -67,4 +80,4 @@ browser.menus.onClicked.addListener((info, tab) => {
       },
     });
   }
-});
+}

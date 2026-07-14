@@ -21,5 +21,12 @@
 
   "background": {
     "scripts": ["extension.js"]
+  },
+
+  "commands": {
+    "copy-bandcamp-platform-id": {
+      "suggested_key": { "default": "Ctrl+Alt+B" },
+      "description": "Generate platform Id on Bandcamp"
+    }
   }
 }
